@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 
 #define MASTER_LEFT
+#define SPLIT_LAYER_STATE_ENABLE
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
@@ -49,3 +50,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
