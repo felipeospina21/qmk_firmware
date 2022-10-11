@@ -17,68 +17,100 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#include <stdio.h>
+// #include <stdio.h>
+
+// Left-hand home row mods
+#define HOME_A LGUI_T(KC_A)
+#define HOME_R LALT_T(KC_R)
+#define HOME_S LSFT_T(KC_S)
+#define HOME_T LCTL_T(KC_T)
+
+// Right-hand home row mods
+#define HOME_N RCTL_T(KC_N)
+#define HOME_E RSFT_T(KC_E)
+#define HOME_I LALT_T(KC_I)
+#define HOME_O RGUI_T(KC_O)
+
+// Left-hand layer 1 home row mods
+#define MOD_LT LGUI_T(KC_LT)
+#define MOD_LSBR LALT_T(KC_LBRC)
+#define MOD_LCBR LSFT_T(KC_LCBR)
+#define MOD_LPRN LCTL_T(KC_LPRN)
+
+// Mouse keys
+#define MOUSE_U KC_MS_UP
+#define MOUSE_D KC_MS_DOWN
+#define MOUSE_L KC_MS_LEFT
+#define MOUSE_R KC_MS_RIGHT
+#define MS_L_CL KC_MS_BTN1
+#define MS_R_CL KC_MS_BTN2
+
+// Shortcuts
+#define CR_AL_SUP C(A(KC_DEL))
+#define CUT C(KC_X)
+#define COPY C(KC_C)
+#define PASTE C(KC_V)
+
+// Media
+#define VOL_UP KC_KB_VOLUME_UP
+#define VOL_DN KC_KB_VOLUME_DOWN
+#define MUTE KC_KB_MUTE
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y,   KC_SCLN,  KC_BSPC,
+      KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y,   KC_SCLN,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-  LGUI_T(KC_CAPS),KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                  KC_H,    KC_N,    KC_E,    KC_I,   KC_O,   KC_QUOT,
+      KC_CAPS,  HOME_A,  HOME_R,  HOME_S,  HOME_T,   KC_D,                       KC_H,    HOME_N,  HOME_E,  HOME_I, HOME_O,   KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+      KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_K,    KC_M,    KC_COMM, KC_DOT, KC_SLSH,  KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LCTL,   MO(1),  KC_SPC,     KC_ENT,  TG(2), KC_RALT
+                                         KC_LCTL, MO(1),  KC_SPC,     KC_ENT,  MO(2), KC_RALT
                                       //`--------------------------'  `--------------------------'
 
   ),
 
   [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_GRV,  KC_EXLM, KC_AT,   KC_DLR,  KC_AMPR, KC_ASTR,                      KC_DEL,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_TRNS,
+      KC_GESC, KC_EXLM, KC_AT,   KC_DLR,  KC_AMPR, KC_ASTR,                      KC_DEL,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_TRNS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_TRNS, KC_LT,   KC_LBRC, KC_LCBR, KC_LPRN, KC_MINS,                      KC_UNDS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_NO,
+    KC_TRNS,  MOD_LT, MOD_LSBR, MOD_LCBR, MOD_LPRN, KC_MINS,                      KC_UNDS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, KC_GT,   KC_RBRC, KC_RCBR, KC_RPRN, KC_EQL,                       KC_PLUS, KC_BSLS, KC_HASH, KC_PERC, KC_CIRC, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS, KC_TRNS,  KC_TRNS,     KC_TRNS,   KC_TRNS, KC_TRNS
+                                          KC_TRNS, KC_TRNS,  KC_TRNS,     KC_TRNS,   MO(3), KC_TRNS
                                       //`--------------------------'  `--------------------------'
   ),
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_EQL,  KC_7,    KC_8,    KC_9,    KC_NO,   KC_DEL,
+       KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_PLUS,  KC_7,    KC_8,    KC_9,  _______,   KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                      KC_MINS, KC_4,    KC_5,    KC_6,    KC_NO,   TG(3),
+      KC_CAPS,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,                      KC_UNDS, KC_4,    KC_5,    KC_6,   _______,   TG(3),
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,  KC_F11,  KC_F12,   KC_F3,   KC_F4,  KC_F5,                       KC_0,    KC_1,    KC_2,    KC_3,    KC_NO,   KC_RSFT,
+      KC_LSFT,  KC_F11,  KC_F12,  CUT,     COPY,    PASTE,                       KC_0,    KC_1,    KC_2,    KC_3,   _______,   KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS,  KC_NO,  KC_SPC,     KC_ENT,  KC_TRNS, KC_TRNS
+                                          KC_TRNS,  MO(3),  KC_SPC,     KC_ENT,  KC_TRNS, KC_TRNS
                                       //`--------------------------'  `--------------------------'
   ),
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     _______, BL_BRTG,  _______, VOL_DN,  VOL_UP,   MUTE,                      CR_AL_SUP, MS_L_CL, MOUSE_U, MS_R_CL, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, _______, _______,                      _______, MOUSE_L, MOUSE_D, MOUSE_R, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, _______, _______,                      _______, KC_WH_D, KC_WH_U, DT_PRNT, DT_DOWN, DT_UP,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          KC_LGUI, TG(0),  KC_SPC,     KC_ENT, TG(3), KC_RALT
                                       //`--------------------------'  `--------------------------'
   )
 };
 
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (host_keyboard_led_state().caps_lock) {
-        RGB_MATRIX_INDICATOR_SET_COLOR(26, 211, 98, 75); // assuming caps lock is at led #5
-    } else {
-        RGB_MATRIX_INDICATOR_SET_COLOR(26, 101, 211, 204);
-    }
-}
-
 #ifdef OLED_ENABLE
+#include <stdio.h>
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
