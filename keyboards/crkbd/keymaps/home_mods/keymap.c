@@ -214,3 +214,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 #endif // OLED_ENABLE
+
+// Per-key tapping term
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LGUI_T(KC_A) || RGUI_T(KC_O) || LALT_T(KC_R) || LALT_T(KC_I):
+            return TAPPING_TERM + 250;
+
+        default:
+            return TAPPING_TERM;
+    }
+}
