@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_CAPS,  HOME_A,  HOME_R,  HOME_S,  HOME_T,   KC_D,                       KC_H,    HOME_N,  HOME_E,  HOME_I,  HOME_O,  KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      TG(3),   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                       KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+      TG(3),   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, S(KC_BSLS),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          LY_NUMS,   MO(1),  KC_SPC,    KC_ENT,   MO(2),   LY_MEDIA
                                       //`--------------------------'  `--------------------------'
@@ -97,26 +97,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // NAVIGATION
   [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_DEL,  KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_TRNS,
+      KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       _______, KC_HOME, KC_UP,   KC_END,  KC_PGUP, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_CAPS,  MOD_F6,  MOD_F7,  MOD_F8,  MOD_F9,  KC_F10,                      KC_UNDS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_GRV,
+     _______,  MOD_F6,  MOD_F7,  MOD_F8,  MOD_F9,  KC_F10,                      KC_UNDS, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     _______,  KC_F11,  KC_F12,  CUT,     COPY,    PASTE,                       KC_PLUS, KC_BSLS, KC_HASH, KC_PERC, KC_CIRC, S(KC_BSLS),
+     _______,  KC_F11,  KC_F12,  CUT,     COPY,    PASTE,                       KC_PLUS, KC_BSLS, KC_HASH, KC_PERC, KC_CIRC, S(KC_GRV),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS, KC_TRNS,  KC_TRNS,     KC_TRNS,   MO(3), KC_TRNS
+                                          _______, _______, _______,    _______, MO(3),  _______
                                       //`--------------------------'  `--------------------------'
   ),
 
   // SYMBOLS
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_GESC, KC_EXLM, KC_AT,   KC_DLR,  KC_AMPR, KC_ASTR,                     _______, _______, _______, _______, _______, KC_TRNS,
+      KC_GESC, KC_EXLM, KC_AT,   KC_DLR,  KC_AMPR, KC_ASTR,                     _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_TRNS, MOD_LT, MOD_LSBR, MOD_LCBR, MOD_LPRN, KC_MINS,                    _______, _______, _______, _______, _______,  _______,
+     _______, MOD_LT, MOD_LSBR, MOD_LCBR, MOD_LPRN, KC_MINS,                    _______, _______, _______, _______, _______,  _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, KC_GT,   KC_RBRC, KC_RCBR, KC_RPRN, KC_EQL,                      _______, _______, _______, _______, _______,  _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TRNS,  MO(3),  KC_SPC,     KC_ENT,  KC_TRNS, KC_TRNS
+                                          _______,  MO(3),  _______,   _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, _______, _______, _______, _______, _______,                      _______, KC_WH_D, KC_WH_U, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, TG(0),  KC_SPC,     KC_ENT, TG(3), _______
+                                          _______, TG(0),  _______,     _______, TG(3), _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, _______, _______, _______, _______, _______,                      KC_0,    KC_1,    KC_2,    KC_3,   _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______,  KC_SPC,     KC_ENT, _______, _______
+                                        _______, _______,  _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -155,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, _______, _______,                      _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______,  KC_SPC,     KC_ENT, _______, _______
+                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -167,36 +167,47 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;
   } 
-  return rotation;
+  return OLED_ROTATION_270;
 }
 
-void oled_render_layer_state(void) {
-    oled_write_P(PSTR("Layer: "), false);
-    switch (layer_state) {
-        case _COLEMAK:
-            oled_write_ln_P(PSTR("COLEMAK"), false);
-            break;
-        case _NAV:
-            oled_write_ln_P(PSTR("NAV"), false);
-            break;
-        case _SYMBOLS:
-            oled_write_ln_P(PSTR("SYMBOL"), false);
-            break;
-        case _NUMS:
-            oled_write_ln_P(PSTR("NUMS"), false);
-            break;
-        case _MEDIA:
-            oled_write_ln_P(PSTR("MEDIA"), false);
-            break;
-        case _MOUSE:
-        case _MOUSE|_NAV:
-        case _MOUSE|_SYMBOLS:
-        case _MOUSE|_NUMS:
-        case _MOUSE|_MEDIA:
-        case _MOUSE|_NAV|_SYMBOLS|_NUMS|_MEDIA:
-            oled_write_ln_P(PSTR("MOUSE"), false);
-            break;
-    }
+// void oled_render_layer_state(void) {
+//     oled_write_P(PSTR("\n\n"), false);
+//     switch (layer_state) {
+//         case _COLEMAK:
+//             oled_write_ln_P(PSTR("BASE"), false);
+//             break;
+//         case _NAV:
+//             oled_write_ln_P(PSTR("NAV"), false);
+//             break;
+//         case _SYMBOLS:
+//             oled_write_ln_P(PSTR("SYMBL"), false);
+//             break;
+//         case _NUMS:
+//             oled_write_ln_P(PSTR("NUMS"), false);
+//             break;
+//         case _MEDIA:
+//             oled_write_ln_P(PSTR("MEDIA"), false);
+//             break;
+//         case _MOUSE:
+//         case _MOUSE|_NAV:
+//         case _MOUSE|_SYMBOLS:
+//         case _MOUSE|_NUMS:
+//         case _MOUSE|_MEDIA:
+//         case _MOUSE|_NAV|_SYMBOLS|_NUMS|_MEDIA:
+//             oled_write_ln_P(PSTR("MOUSE"), false);
+//             break;
+//     }
+// }
+
+void render_layer_state(void) {
+    oled_write_ln_P(PSTR("LAYER"), false);
+    oled_write_ln_P(PSTR("--*--"), false);
+    oled_write_ln_P(PSTR("COLEM"), layer_state_is(0));
+    oled_write_ln_P(PSTR("SYMBL"), layer_state_is(2));
+    oled_write_ln_P(PSTR("NAVIG"), layer_state_is(1));
+    oled_write_ln_P(PSTR("MOUSE"), layer_state_is(3));
+    oled_write_ln_P(PSTR("MEDIA"), layer_state_is(5));
+    oled_write_ln_P(PSTR("NUMS "), layer_state_is(4));
 }
 
 char keylog_str[24] = {};
@@ -235,8 +246,8 @@ void oled_render_logo(void) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_render_layer_state();
-        // render_status_main();
+        // oled_render_layer_state();
+        render_layer_state();
     } else {
         oled_render_logo();
     }
