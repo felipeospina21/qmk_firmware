@@ -17,3 +17,4 @@ when prompted by the terminal reset the keyboard by pressing the reset button
 * change symbols to layer 2 with numpad.
 * ~~reasign outter thumb and shift keys to other keys.~~
 * check tap-dance for spanish letters and tilde, among other options.
+* Remove Mouse layer activation with both middle thumbs

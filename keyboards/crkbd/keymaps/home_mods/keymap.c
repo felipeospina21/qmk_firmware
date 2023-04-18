@@ -20,7 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #include <stdio.h>
 
 // Layer Modifiers
-#define LY_NUMS LT(4, KC_DEL)
+#define LY_NAV LT(1, KC_ESC)
+#define LY_SYMB LT(2, KC_BSPC)
+#define LY_NUMS LT(4, KC_CAPS)
 #define LY_MEDIA LT(5, KC_DEL)
 
 // Left-hand home row mods
@@ -89,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       TG(3),   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, S(KC_BSLS),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         LY_NUMS,   MO(1),  KC_SPC,    KC_ENT,   MO(2),   LY_MEDIA
+                                         LY_NUMS,  LY_NAV,  KC_SPC,    KC_ENT,   LY_SYMB, LY_MEDIA
                                       //`--------------------------'  `--------------------------'
 
   ),
