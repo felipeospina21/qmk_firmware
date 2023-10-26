@@ -20,9 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #include <stdio.h>
 
 // Layer Modifiers
-#define LY_NAV LT(1, KC_ESC)
-#define LY_SYMB LT(2, KC_BSPC)
-#define LY_NUMS LT(4, KC_CAPS)
+#define LY_NAV LT(1, KC_BSPC)
+#define LY_SYMB LT(2, KC_ESC)
+#define LY_NUMS LT(4, KC_SPC)
 #define LY_MEDIA LT(5, KC_DEL)
 
 // Left-hand home row mods
@@ -68,6 +68,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CUT C(KC_X)
 #define COPY C(KC_C)
 #define PASTE C(KC_V)
+#define MAC_CAPTURE LCMD(S(KC_5))
 
 // Media
 #define VOL_UP KC_KB_VOLUME_UP
@@ -91,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       TG(3),   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, S(KC_BSLS),
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         LY_NUMS,  LY_NAV,  KC_SPC,    KC_ENT,   LY_SYMB, LY_MEDIA
+                                         LY_MEDIA,  LY_NAV,  LY_NUMS,  KC_ENT,  LY_SYMB, MAC_CAPTURE 
                                       //`--------------------------'  `--------------------------'
 
   ),
