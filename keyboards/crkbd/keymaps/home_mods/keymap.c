@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdint.h>
+#include "oled.c"
+#include "os_detection.h"
 // #include "quantum.h"
 
 
@@ -92,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                       KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-    CW_TOGG,  HOME_A,  HOME_R,  HOME_S,  LY_NAV,   HOME_D ,                     KC_H,    HOME_N,  HOME_E,  HOME_I,  HOME_O,  KC_QUOT,
+    QK_LEAD,  HOME_A,  HOME_R,  HOME_S,  LY_NAV,   HOME_D ,                     KC_H,    HOME_N,  HOME_E,  HOME_I,  HOME_O,  KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      QK_LEAD,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,   LY_FUN,   KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
+    CW_TOGG,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,   LY_FUN,   KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          TG(3),  KC_DEL,  LY_NUMS,  KC_ENT,  LY_SYMB, MAC_CAPTURE 
                                       //`--------------------------'  `--------------------------'
@@ -180,74 +182,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // )
 };
 
-#ifdef OLED_ENABLE
-#include <stdio.h>
-
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (!is_keyboard_master()) {
-    return OLED_ROTATION_180;
-  } 
-  return OLED_ROTATION_270;
-}
-
-void render_layer_state(void) {
-    oled_write_ln_P(PSTR("LAYER"), false);
-    oled_write_ln_P(PSTR("--*--"), false);
-    oled_write_ln_P(PSTR("COLEM"), layer_state_is(0));
-    oled_write_ln_P(PSTR("SYMBL"), layer_state_is(2));
-    oled_write_ln_P(PSTR("NAVIG"), layer_state_is(1));
-    oled_write_ln_P(PSTR("MOUSE"), layer_state_is(3));
-    oled_write_ln_P(PSTR("FUNCS"), layer_state_is(5));
-    oled_write_ln_P(PSTR("NUMS "), layer_state_is(4));
-}
-
-char keylog_str[24] = {};
-
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
-void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
-    }
-}
-
-void oled_render_logo(void) {
-    static const char PROGMEM crkbd_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
-        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
-        0};
-    oled_write_P(crkbd_logo, false);
-}
-
-bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        // oled_render_layer_state();
-        render_layer_state();
-    } else {
-        oled_render_logo();
-    }
-    return false;
-}
-
-
-#endif // OLED_ENABLE
-
 // Per-key tapping term
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -306,21 +240,44 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 
 
 const uint16_t PROGMEM esc_combo[] = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM caps_combo[] = {KC_A, KC_R, COMBO_END};
 
 combo_t key_combos[] = {  
     COMBO(esc_combo, KC_ESC),
+    // TODO: Change for regurlar key code, not working
+    COMBO(caps_combo, CW_TOGG),
 };
 
 void leader_end_user(void){
+  uint8_t host_os = detected_host_os();
 
-  if(leader_sequence_one_key(KC_N)){
-    SEND_STRING(SS_LCTL("1"));
+  switch (host_os){
+    case OS_LINUX:
+      if(leader_sequence_one_key(KC_N)){
+        SEND_STRING(SS_LALT("1"));
   
-  }else if (leader_sequence_one_key(KC_E)){
-    SEND_STRING(SS_LCTL("2"));
+      }else if (leader_sequence_one_key(KC_E)){
+        SEND_STRING(SS_LALT("2"));
   
-  }else if (leader_sequence_one_key(KC_I)){
-    SEND_STRING(SS_LCTL("3"));
+      }else if (leader_sequence_one_key(KC_I)){
+        SEND_STRING(SS_LALT("3"));
   
+      }
+      break;
+
+    default:
+      if(leader_sequence_one_key(KC_N)){
+        SEND_STRING(SS_LCTL("1"));
+  
+      }else if (leader_sequence_one_key(KC_E)){
+        SEND_STRING(SS_LCTL("2"));
+  
+      }else if (leader_sequence_one_key(KC_I)){
+        SEND_STRING(SS_LCTL("3"));
+  
+      }
+      break;
   }
+
+  
 }
