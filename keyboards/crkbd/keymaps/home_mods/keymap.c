@@ -249,35 +249,46 @@ combo_t key_combos[] = {
 };
 
 void leader_end_user(void){
-  uint8_t host_os = detected_host_os();
-
-  switch (host_os){
-    case OS_LINUX:
-      if(leader_sequence_one_key(KC_N)){
-        SEND_STRING(SS_LALT("1"));
+  if(leader_sequence_one_key(KC_N)){
+      SEND_STRING(SS_LCTL("1"));
   
-      }else if (leader_sequence_one_key(KC_E)){
-        SEND_STRING(SS_LALT("2"));
+  }else if (leader_sequence_one_key(KC_E)){
+    SEND_STRING(SS_LCTL("2"));
   
-      }else if (leader_sequence_one_key(KC_I)){
-        SEND_STRING(SS_LALT("3"));
+  }else if (leader_sequence_one_key(KC_I)){
+    SEND_STRING(SS_LCTL("3"));
   
-      }
-      break;
-
-    default:
-      if(leader_sequence_one_key(KC_N)){
-        SEND_STRING(SS_LCTL("1"));
+  }else if (leader_sequence_one_key(KC_O)){
+    SEND_STRING(SS_LCTL("4"));
   
-      }else if (leader_sequence_one_key(KC_E)){
-        SEND_STRING(SS_LCTL("2"));
-  
-      }else if (leader_sequence_one_key(KC_I)){
-        SEND_STRING(SS_LCTL("3"));
-  
-      }
-      break;
   }
+//   uint8_t host_os = detected_host_os();
 
+//   switch (host_os){
+//     case OS_LINUX:
+//       if(leader_sequence_one_key(KC_N)){
+//         SEND_STRING(SS_LALT("1"));
   
+//       }else if (leader_sequence_one_key(KC_E)){
+//         SEND_STRING(SS_LALT("2"));
+  
+//       }else if (leader_sequence_one_key(KC_I)){
+//         SEND_STRING(SS_LALT("3"));
+  
+//       }
+//       break;
+
+//     default:
+//       if(leader_sequence_one_key(KC_N)){
+//         SEND_STRING(SS_LCTL("1"));
+  
+//       }else if (leader_sequence_one_key(KC_E)){
+//         SEND_STRING(SS_LCTL("2"));
+  
+//       }else if (leader_sequence_one_key(KC_I)){
+//         SEND_STRING(SS_LCTL("3"));
+  
+//       }
+//       break;
+//   }
 }
